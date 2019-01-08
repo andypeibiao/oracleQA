@@ -15,5 +15,8 @@
 正确语句应该是
 > expdp test/test@127.0.0.1:1521/test schemas=test directory=dir_dp dumpfile=test.dmp logfile=test.log;
 
+2. 在长时间使用oracle之后，可能会出现oracle连接非常缓慢，还有可能造成数据库监听失败的原因，但是重启了之后又可以连接上，过一会就又不能正常使用了，此时应该检查是否是日志过多(最大4G)
+  1）如果不需要记录日志，可以直接通过设置将oracle日志关闭
+  2）如果需要，则将日志文件删除即可
 
-
+3. oracle数据库在做rac集群的时候，在创建表空间的时候不能按照单节点创建，必须要用特有的语句创建
