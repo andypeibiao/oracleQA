@@ -24,3 +24,5 @@
 4. oracle数据库用户被锁定
 > 登录system as sysdba之后，alter user system account unlock;即可解锁
 > 用户解锁之后可以通过下列语句进行修改密码：alter user system identified by +新的密码;即可重置密码
+
+5. oracle数据库system默认密码是manager，sys密码:change_on_install，scott密码:tiger
