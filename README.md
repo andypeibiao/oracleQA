@@ -26,3 +26,36 @@
 > 用户解锁之后可以通过下列语句进行修改密码：alter user system identified by +新的密码;即可重置密码
 
 5. oracle数据库system默认密码是manager，sys密码:change_on_install，scott密码:tiger
+
+6. oracle修改字符集问题
+> 通常我们在创建完oracle后，可能在安装过程中忘记设置字符集，导致后续程序中出现了汉字为？的情况，解决方法如下
+```
+1. 我们首先需要确定是否数据库里面数据也为？等数据
+2. 如果不是，直接找程序上的问题；如果是，则需要排查是否oracle服务端的编码集是否正确
+3. 如果不正确，则需要下方的解决方案进行解决
+```
+字符集修改步骤：
+1. 确定数据库没有活动的连接。
+```
+1. 关闭数据库
+SQL> shutdown immediate;
+2. 以挂接方式启动数据库
+SQL> startup mount;
+```
+2. 将数据库置于restricted mode下，并打开数据库。
+```
+SQL> alter system enable restricted session;
+SQL> alter database open;
+```
+3. 直接通过INTERNAL_USE跳过超集的检查更改字符集。
+```
+SQL> ALTER DATABASE character set INTERNAL_USE ZHS16GBK; 
+```
+4. 关闭数据库restricted mode
+```
+SQL> alter system disable restricted session;
+```
+5. 修改完成，查看数据库字符集即可
+```
+SQL> select userenv('language') from dual;
+```
