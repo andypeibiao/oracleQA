@@ -20,3 +20,7 @@
   2）如果需要，则将日志文件删除即可
 
 3. oracle数据库在做rac集群的时候，在创建表空间的时候不能按照单节点创建，必须要用特有的语句创建
+
+4. oracle数据库用户被锁定
+> 登录system as sysdba之后，alter user system account unlock;即可解锁
+> 用户解锁之后可以通过下列语句进行修改密码：alter user system identified by +新的密码;即可重置密码
